@@ -57,9 +57,3 @@
     width: 16%;
   }
 }
-
-@media screen and (max-width: 480px) {
-  .kameo-roster-portrait {
-    width: 24%;
-  }
-}
