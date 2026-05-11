@@ -260,6 +260,7 @@ body.light-theme .theme-selector {
 }
 
 .mobile-menu-overlay.visible {
+  display: block;
   opacity: 1;
 }
 
@@ -275,10 +276,6 @@ body.light-theme .theme-selector {
   }
 
   .mobile-menu {
-    display: block;
-  }
-
-  .mobile-menu-overlay {
     display: block;
   }
 
