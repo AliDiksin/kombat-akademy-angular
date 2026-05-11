@@ -613,6 +613,53 @@
   margin-right: 4px;
 }
 
+/* === COMBO THEORY === */
+.combo-theory {
+  margin-bottom: 24px;
+}
+
+.theory-section {
+  background: var(--bg-row-1);
+  border-left: 3px solid var(--char-color, var(--primary-color));
+  border-radius: 4px;
+  margin-bottom: 16px;
+  padding: 16px;
+}
+
+.theory-heading {
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--char-color, var(--primary-color));
+  margin-bottom: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 8px;
+}
+
+.theory-paragraph {
+  font-size: 15px;
+  line-height: 22px;
+  margin-bottom: 8px;
+}
+
+.theory-paragraph:last-child {
+  margin-bottom: 0;
+}
+
+.theory-note {
+  font-size: 13px;
+  color: rgb(192, 160, 96);
+  font-style: italic;
+  margin-top: 8px;
+  padding: 8px 12px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  line-height: 20px;
+}
+
+.theory-note i {
+  margin-right: 4px;
+}
+
 /* === LOADING / EMPTY STATES === */
 .loading {
   text-align: center;

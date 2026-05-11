@@ -200,6 +200,31 @@
     </div>
 
     <div class="combo-list" *ngIf="!isLoadingCombos">
+
+      <!-- COMBO THEORY: Prose from the original site -->
+      <div class="combo-theory" *ngIf="comboTheory">
+        <div *ngFor="let section of comboTheory" class="theory-section">
+          <h3 class="theory-heading">{{ section.heading }}</h3>
+          <div *ngFor="let paragraph of section.paragraphs" class="theory-paragraph">
+            <span *ngFor="let segment of parseTheoryText(paragraph)">
+              <span *ngIf="segment.type === 'text'">{{ segment.value }}</span>
+              <b *ngIf="segment.type === 'bold'">{{ segment.value }}</b>
+              <app-input-notation *ngIf="segment.type === 'notation'" [input]="segment.value" size="s"></app-input-notation>
+            </span>
+          </div>
+          <div *ngIf="section.notes.length > 0">
+            <div class="theory-note" *ngFor="let note of section.notes">
+              <i class="fa-solid fa-circle-info"></i>
+              <span *ngFor="let segment of parseTheoryText(note)">
+                <span *ngIf="segment.type === 'text'">{{ segment.value }}</span>
+                <b *ngIf="segment.type === 'bold'">{{ segment.value }}</b>
+                <app-input-notation *ngIf="segment.type === 'notation'" [input]="segment.value" size="s"></app-input-notation>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div *ngFor="let sub of getComboSubcategories()">
         <div class="subcategory-header" *ngIf="sub">
           <h3>{{ sub }}</h3>

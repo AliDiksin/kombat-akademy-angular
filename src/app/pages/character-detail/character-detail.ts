@@ -14,6 +14,7 @@ import { CHARACTERS, CHARACTER_LIST, Character } from '../../data/characters';
 import { KAMEOS } from '../../data/kameos';
 import { TEAMS } from '../../data/teams';
 import { STRATEGY } from '../../data/strategy';
+import { COMBO_THEORY } from '../../data/combo-theory';
 import { GameDataService, MoveData, ComboData } from '../../services/game-data';
 import { InputNotationComponent } from '../../components/input-notation/input-notation';
 
@@ -36,6 +37,11 @@ export class CharacterDetail implements OnInit {
   get strategyData() {
     if (!this.character) return null;
     return STRATEGY[this.character.name] || null;
+  }
+
+  get comboTheory() {
+    if (!this.character) return null;
+    return COMBO_THEORY[this.character.name] || null;
   }
 
   moves: MoveData[] = [];
@@ -214,5 +220,31 @@ export class CharacterDetail implements OnInit {
     if (el) {
       el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
+  }
+
+  parseTheoryText(text: string): { type: 'text' | 'bold' | 'notation'; value: string }[] {
+    const segments: { type: 'text' | 'bold' | 'notation'; value: string }[] = [];
+    let remaining = text;
+    const regex = /(\{.*?\})|(\*\*.*?\*\*)/g;
+    let lastIndex = 0;
+    let match: RegExpExecArray | null;
+
+    while ((match = regex.exec(remaining)) !== null) {
+      if (match.index > lastIndex) {
+        segments.push({ type: 'text', value: remaining.slice(lastIndex, match.index) });
+      }
+      if (match[1]) {
+        segments.push({ type: 'notation', value: match[1].slice(1, -1) });
+      } else if (match[2]) {
+        segments.push({ type: 'bold', value: match[2].slice(2, -2) });
+      }
+      lastIndex = match.index + match[0].length;
+    }
+
+    if (lastIndex < remaining.length) {
+      segments.push({ type: 'text', value: remaining.slice(lastIndex) });
+    }
+
+    return segments;
   }
 }
