@@ -212,3 +212,48 @@
     line-height: 24px;
   }
 }
+
+/* Introduction block */
+.intro-block {
+  background: var(--bg-row-1);
+  border-left: 3px solid var(--kameo-color, var(--primary-color));
+  border-radius: 4px;
+  padding: 20px;
+  margin-bottom: 24px;
+}
+
+.intro-block p {
+  font-size: 16px;
+  line-height: 24px;
+  margin-bottom: 16px;
+}
+
+.intro-lists {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.intro-col h2 {
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--kameo-color, var(--primary-color));
+  margin-bottom: 8px;
+}
+
+.intro-col ul {
+  list-style: disc;
+  margin-left: 20px;
+}
+
+.intro-col li {
+  font-size: 15px;
+  line-height: 22px;
+  margin-bottom: 4px;
+}
+
+@media screen and (max-width: 1024px) {
+  .intro-lists {
+    grid-template-columns: 1fr;
+  }
+}

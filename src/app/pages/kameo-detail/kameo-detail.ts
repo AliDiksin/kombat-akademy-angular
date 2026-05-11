@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { NgFor, NgIf, NgClass } from '@angular/common';
 import { KAMEO_LIST, Kameo } from '../../data/kameos';
+import { KAMEO_STRATEGY } from '../../data/kameo-strategy';
 import { GameDataService, MoveData } from '../../services/game-data';
 import { InputNotationComponent } from '../../components/input-notation/input-notation';
 
@@ -15,6 +16,11 @@ export class KameoDetail implements OnInit {
   kameo: Kameo | null = null;
   moves: MoveData[] = [];
   isLoading: boolean = true;
+
+  get strategyData() {
+    if (!this.kameo) return null;
+    return KAMEO_STRATEGY[this.kameo.name] || null;
+  }
 
   constructor(
     private route: ActivatedRoute,

@@ -43,6 +43,27 @@
       </div>
     </section>
 
+    <!-- INTRODUCTIONS: Supercombo overview -->
+    <section id="kameo-intro" class="char-section" *ngIf="strategyData">
+      <div class="intro-block">
+        <p>{{ strategyData.overview }}</p>
+        <div class="intro-lists" *ngIf="strategyData.strengths.length > 0 || strategyData.weaknesses.length > 0">
+          <div class="intro-col" *ngIf="strategyData.strengths.length > 0">
+            <h2>Strengths</h2>
+            <ul>
+              <li *ngFor="let s of strategyData.strengths">{{ s }}</li>
+            </ul>
+          </div>
+          <div class="intro-col" *ngIf="strategyData.weaknesses.length > 0">
+            <h2>Weaknesses</h2>
+            <ul>
+              <li *ngFor="let w of strategyData.weaknesses">{{ w }}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section id="kameo-move-list">
       <h1>MOVE LIST</h1>
 
@@ -96,14 +117,6 @@
           <p>No move data found for this Kameo.</p>
         </div>
       </ng-container>
-    </section>
-
-    <section id="kameo-strategy">
-      <h1>STRATEGY</h1>
-      <div class="strategy-box">
-        <p>Strategy notes from the original site are still being ported.</p>
-        <p>For now, use this Kameo to extend pressure, cover space, and convert stray hits into extra damage.</p>
-      </div>
     </section>
   </div>
 </div>
