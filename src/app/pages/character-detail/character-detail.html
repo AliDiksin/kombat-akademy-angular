@@ -7,7 +7,7 @@
     <a href="#overview" class="char-nav-link"><i class="fa-solid fa-user-ninja"></i> OVERVIEW</a>
     <a href="#move-list" class="char-nav-link"><i class="fa-solid fa-rectangle-list"></i> MOVE LIST</a>
     <a href="#combos" class="char-nav-link"><i class="fa-solid fa-hand-fist"></i> COMBOS</a>
-    <a href="#strategy" class="char-nav-link"><i class="fa-solid fa-brain"></i> STRATEGY</a>
+    <a href="#introductions" class="char-nav-link"><i class="fa-solid fa-brain"></i> INTRODUCTIONS</a>
     <a href="#kameos" class="char-nav-link"><i class="fa-solid fa-user-group"></i> KAMEOS</a>
     <a href="#gameplay" class="char-nav-link"><i class="fa-solid fa-tv"></i> GAMEPLAY</a>
   </nav>
@@ -17,9 +17,7 @@
     <div class="char-header">
       <div class="char-header-info">
         <div class="char-nav-links">
-          <a href="#move-list" class="char-nav-btn"><i class="fa-solid fa-rectangle-list"></i> MOVE LIST</a>
-          <a href="#combos" class="char-nav-btn"><i class="fa-solid fa-hand-fist"></i> COMBOS</a>
-          <a href="#strategy" class="char-nav-btn"><i class="fa-solid fa-brain"></i> STRATEGY</a>
+          <a href="#introductions" class="char-nav-btn"><i class="fa-solid fa-brain"></i> INTRODUCTIONS</a>
           <a href="#kameos" class="char-nav-btn"><i class="fa-solid fa-user-group"></i> KAMEOS</a>
           <a href="#gameplay" class="char-nav-btn"><i class="fa-solid fa-tv"></i> GAMEPLAY</a>
         </div>
@@ -27,6 +25,29 @@
       <div class="char-header-img">
         <img [src]="'/assets/images/characters/renders/' + character.slug + '.png'"
              [alt]="character.name">
+      </div>
+    </div>
+  </section>
+
+  <!-- INTRODUCTIONS: Supercombo overview text at the top -->
+  <section id="introductions" class="char-section" *ngIf="strategyData">
+    <h1>INTRODUCTIONS</h1>
+    <div class="intro-block">
+      <p>{{ strategyData.overview }}</p>
+    </div>
+
+    <div class="intro-lists" *ngIf="strategyData.strengths.length > 0 || strategyData.weaknesses.length > 0">
+      <div class="intro-col" *ngIf="strategyData.strengths.length > 0">
+        <h2>Strengths</h2>
+        <ul>
+          <li *ngFor="let s of strategyData.strengths">{{ s }}</li>
+        </ul>
+      </div>
+      <div class="intro-col" *ngIf="strategyData.weaknesses.length > 0">
+        <h2>Weaknesses</h2>
+        <ul>
+          <li *ngFor="let w of strategyData.weaknesses">{{ w }}</li>
+        </ul>
       </div>
     </div>
   </section>
@@ -200,29 +221,6 @@
         </div>
         <div class="empty-state" *ngIf="filteredCombos.length === 0">
           <p>No combos found for this category.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- STRATEGY SECTION -->
-  <section id="strategy" class="char-section" *ngIf="strategyData">
-    <h1>STRATEGY</h1>
-    <div class="strategy-content">
-      <p>{{ strategyData.overview }}</p>
-
-      <div class="strategy-lists" *ngIf="strategyData.strengths.length > 0 || strategyData.weaknesses.length > 0">
-        <div class="strategy-col" *ngIf="strategyData.strengths.length > 0">
-          <h2>Strengths</h2>
-          <ul>
-            <li *ngFor="let s of strategyData.strengths">{{ s }}</li>
-          </ul>
-        </div>
-        <div class="strategy-col" *ngIf="strategyData.weaknesses.length > 0">
-          <h2>Weaknesses</h2>
-          <ul>
-            <li *ngFor="let w of strategyData.weaknesses">{{ w }}</li>
-          </ul>
         </div>
       </div>
     </div>
