@@ -145,6 +145,9 @@
           <div class="move-inputs">
             <app-input-notation [input]="move.command" size="s"></app-input-notation>
           </div>
+          <div class="move-desc" *ngIf="getMoveNote(move)">
+            {{ getMoveNote(move) }}
+          </div>
           <div class="move-frames">
             <span *ngIf="move.hit_damage && move.hit_damage !== '0.00'" class="move-stat">
               <span class="move-stat-label">DMG</span>

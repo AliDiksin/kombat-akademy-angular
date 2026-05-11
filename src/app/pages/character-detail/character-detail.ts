@@ -15,6 +15,7 @@ import { KAMEOS } from '../../data/kameos';
 import { TEAMS } from '../../data/teams';
 import { STRATEGY } from '../../data/strategy';
 import { COMBO_THEORY } from '../../data/combo-theory';
+import { MOVE_NOTES } from '../../data/move-notes';
 import { GameDataService, MoveData, ComboData } from '../../services/game-data';
 import { InputNotationComponent } from '../../components/input-notation/input-notation';
 
@@ -222,12 +223,19 @@ export class CharacterDetail implements OnInit {
     }
   }
 
+  getMoveNote(move: MoveData): string | null {
+    if (!this.character) return null;
+    const charNotes = MOVE_NOTES[this.character.name];
+    if (!charNotes) return null;
+    return charNotes[move.command] || null;
+  }
+
   parseTheoryText(text: string): { type: 'text' | 'bold' | 'notation'; value: string }[] {
     const segments: { type: 'text' | 'bold' | 'notation'; value: string }[] = [];
-    let remaining = text;
     const regex = /(\{.*?\})|(\*\*.*?\*\*)/g;
     let lastIndex = 0;
     let match: RegExpExecArray | null;
+    const remaining = text;
 
     while ((match = regex.exec(remaining)) !== null) {
       if (match.index > lastIndex) {

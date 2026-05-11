@@ -231,6 +231,16 @@
   margin-bottom: 8px;
 }
 
+.move-desc {
+  font-size: 14px;
+  line-height: 20px;
+  color: rgb(192, 192, 192);
+  margin-bottom: 8px;
+  padding: 6px 8px;
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+}
+
 .move-frames {
   display: flex;
   flex-wrap: wrap;
