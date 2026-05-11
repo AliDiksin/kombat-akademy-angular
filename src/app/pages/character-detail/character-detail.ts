@@ -208,4 +208,11 @@ export class CharacterDetail implements OnInit {
   getKameoPortrait(name: string): string {
     return `/assets/images/kameos/portraits/${this.getKameoSlug(name)}.png`;
   }
+
+  scrollTo(sectionId: string): void {
+    const el = document.getElementById(sectionId);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
 }

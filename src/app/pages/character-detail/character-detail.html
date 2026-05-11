@@ -4,12 +4,12 @@
 
   <!-- NAVIGATION BAR: Sticky top bar for jumping to sections -->
   <nav class="char-nav">
-    <a href="#overview" class="char-nav-link"><i class="fa-solid fa-user-ninja"></i> OVERVIEW</a>
-    <a href="#move-list" class="char-nav-link"><i class="fa-solid fa-rectangle-list"></i> MOVE LIST</a>
-    <a href="#combos" class="char-nav-link"><i class="fa-solid fa-hand-fist"></i> COMBOS</a>
-    <a href="#introductions" class="char-nav-link"><i class="fa-solid fa-brain"></i> INTRODUCTIONS</a>
-    <a href="#kameos" class="char-nav-link"><i class="fa-solid fa-user-group"></i> KAMEOS</a>
-    <a href="#gameplay" class="char-nav-link"><i class="fa-solid fa-tv"></i> GAMEPLAY</a>
+    <a (click)="scrollTo('overview')" class="char-nav-link"><i class="fa-solid fa-user-ninja"></i> OVERVIEW</a>
+    <a (click)="scrollTo('move-list')" class="char-nav-link"><i class="fa-solid fa-rectangle-list"></i> MOVE LIST</a>
+    <a (click)="scrollTo('combos')" class="char-nav-link"><i class="fa-solid fa-hand-fist"></i> COMBOS</a>
+    <a (click)="scrollTo('introductions')" class="char-nav-link"><i class="fa-solid fa-brain"></i> INTRODUCTIONS</a>
+    <a (click)="scrollTo('kameos')" class="char-nav-link"><i class="fa-solid fa-user-group"></i> KAMEOS</a>
+    <a (click)="scrollTo('gameplay')" class="char-nav-link"><i class="fa-solid fa-tv"></i> GAMEPLAY</a>
   </nav>
 
   <!-- CHARACTER HEADER: Render -->
