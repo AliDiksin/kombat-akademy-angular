@@ -662,6 +662,23 @@
 
 /* === RESPONSIVE === */
 @media screen and (max-width: 1024px) {
+  .char-nav {
+    gap: 4px;
+    justify-content: center;
+  }
+
+  .char-nav-link,
+  .char-nav-btn {
+    font-size: 13px;
+    padding: 6px 10px;
+    gap: 4px;
+  }
+
+  .char-nav-links {
+    gap: 6px;
+    justify-content: center;
+  }
+
   .char-header {
     flex-direction: column;
     align-items: center;
@@ -669,12 +686,19 @@
   }
 
   .char-header-img {
-    width: 200px;
+    width: 180px;
   }
 
-  .char-nav,
-  .char-nav-links {
-    justify-content: center;
+  .char-header-info {
+    width: 100%;
+  }
+
+  .char-section {
+    margin-bottom: 24px;
+  }
+
+  .char-section h1 {
+    font-size: 20px;
   }
 
   .char-overview {
@@ -688,12 +712,12 @@
   }
 
   .char-portrait {
-    width: 96px;
-    height: 96px;
+    width: 80px;
+    height: 80px;
   }
 
   .char-info-name {
-    font-size: 28px;
+    font-size: 24px;
   }
 
   .pros-cons-row {
@@ -701,14 +725,179 @@
   }
 
   .char-stats-chart {
-    grid-template-columns: 96px 1fr;
+    grid-template-columns: 80px 1fr;
   }
 
-  .char-kameos {
-    justify-content: center;
+  .char-stats-labels {
+    font-size: 12px;
+  }
+
+  .tabs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 4px;
+  }
+
+  .tab {
+    font-size: 14px;
+    padding: 6px 12px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .subcategory-header h3 {
+    font-size: 16px;
+  }
+
+  .move-item {
+    padding: 10px 12px;
+  }
+
+  .move-name {
+    font-size: 14px;
+  }
+
+  .move-frames {
+    gap: 4px;
+  }
+
+  .move-stat {
+    min-width: 44px;
+    padding: 3px 6px;
+  }
+
+  .move-stat-label {
+    font-size: 9px;
+  }
+
+  .move-stat-value {
+    font-size: 12px;
+  }
+
+  .move-inputs {
+    font-size: 12px;
+    padding: 6px;
+  }
+
+  .combo-item {
+    padding: 10px 12px;
+  }
+
+  .combo-inputs {
+    font-size: 12px;
+    padding: 6px;
+  }
+
+  .combo-header {
+    gap: 8px;
+  }
+
+  .intro-block {
+    padding: 14px;
+  }
+
+  .intro-block p {
+    font-size: 14px;
+    line-height: 22px;
   }
 
   .intro-lists {
     grid-template-columns: 1fr;
+    gap: 16px;
+    margin-top: 16px;
+  }
+
+  .intro-col h2 {
+    font-size: 16px;
+  }
+
+  .intro-col li {
+    font-size: 14px;
+  }
+
+  .char-kameos {
+    justify-content: center;
+    padding: 12px;
+    gap: 12px;
+  }
+
+  .char-kameo {
+    width: 96px;
+  }
+
+  .char-kameo-name {
+    font-size: 12px;
+  }
+
+  .gameplay-title {
+    font-size: 14px;
+  }
+
+  .gameplay-desc {
+    font-size: 12px;
+  }
+
+  .gameplay-link {
+    padding: 10px 12px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .char-nav-link,
+  .char-nav-btn {
+    font-size: 11px;
+    padding: 4px 8px;
+    gap: 3px;
+  }
+
+  .char-header-img {
+    width: 140px;
+  }
+
+  .char-info-name {
+    font-size: 20px;
+  }
+
+  .char-stats-chart {
+    grid-template-columns: 60px 1fr;
+  }
+
+  .char-stats-labels {
+    font-size: 10px;
+  }
+
+  .move-stat {
+    min-width: 38px;
+    padding: 2px 4px;
+  }
+
+  .move-stat-label {
+    font-size: 8px;
+  }
+
+  .move-stat-value {
+    font-size: 11px;
+  }
+
+  .move-item {
+    padding: 8px 10px;
+  }
+
+  .combo-item {
+    padding: 8px 10px;
+  }
+
+  .intro-block {
+    padding: 10px;
+  }
+
+  .intro-block p {
+    font-size: 13px;
+    line-height: 20px;
+  }
+
+  .char-kameo {
+    width: 80px;
   }
 }

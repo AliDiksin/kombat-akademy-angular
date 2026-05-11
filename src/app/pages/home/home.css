@@ -69,3 +69,21 @@
     padding: 20px;
   }
 }
+
+@media screen and (max-width: 480px) {
+  .home-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .home-card-icon {
+    font-size: 24px;
+  }
+
+  .home-card-title {
+    font-size: 16px;
+  }
+
+  .home-card-desc {
+    font-size: 13px;
+  }
+}
