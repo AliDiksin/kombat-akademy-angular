@@ -129,23 +129,3 @@
     margin: 16px 0;
   }
 }
-
-@media screen and (max-width: 480px) {
-  .guide-content h1 {
-    font-size: 24px;
-  }
-
-  .guide-content h2 {
-    font-size: 20px;
-  }
-
-  .guide-content p {
-    font-size: 14px;
-    line-height: 22px;
-  }
-
-  .pagination-btn {
-    font-size: 14px;
-    padding: 10px 14px;
-  }
-}
