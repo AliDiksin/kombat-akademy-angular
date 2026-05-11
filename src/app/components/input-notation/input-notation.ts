@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, OnDestroy, SimpleChanges } from '@angular/core';
 import { NgFor, NgIf, NgClass } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { SettingsService } from '../../services/settings';
@@ -156,7 +156,7 @@ interface InputPart {
     .universal-red { fill: #e04040; }
   `]
 })
-export class InputNotationComponent implements OnInit, OnDestroy {
+export class InputNotationComponent implements OnInit, OnChanges, OnDestroy {
   @Input() input: string = '';
   @Input() size: string = 's';
 
@@ -169,8 +169,14 @@ export class InputNotationComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.platformSub = this.settingsService.platform$.subscribe(platform => {
       this.platform = platform;
-      this.parts = this.parseInput(this.input);
+      this.rebuildParts();
     });
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['input']) {
+      this.rebuildParts();
+    }
   }
 
   ngOnDestroy(): void {
@@ -190,15 +196,107 @@ export class InputNotationComponent implements OnInit, OnDestroy {
         parts.push({ type: 'text', text: trimmed === ' ' ? ' ' : trimmed });
         continue;
       }
-      const upperToken = trimmed.toUpperCase();
-      const iconId = this.getIconForToken(upperToken);
-      if (iconId) {
-        parts.push({ type: 'svg', id: iconId });
-      } else {
-        parts.push({ type: 'text', text: trimmed });
-      }
+      parts.push(...this.parseNotationToken(trimmed));
     }
     return parts;
+  }
+
+  private rebuildParts(): void {
+    this.parts = this.parseInput(this.input);
+  }
+
+  private parseNotationToken(token: string): InputPart[] {
+    if (this.platform === 'plain-text') {
+      return [{ type: 'text', text: token }];
+    }
+
+    const upperToken = token.toUpperCase();
+
+    // Slash-separated inputs like 1/2/3/4.
+    if (token.includes('/')) {
+      const parts: InputPart[] = [];
+      const segments = token.split('/');
+
+      segments.forEach((segment, index) => {
+        if (segment) {
+          parts.push(...this.parseNotationToken(segment));
+        }
+
+        if (index < segments.length - 1) {
+          parts.push({ type: 'text', text: '/' });
+        }
+      });
+
+      return parts;
+    }
+
+    // Attached multipliers like 4x5 or 1x2.
+    const multiplierMatch = token.match(/^(.+?)(x\d+)$/i);
+    if (multiplierMatch && multiplierMatch[1]) {
+      const base = multiplierMatch[1];
+      const multiplier = multiplierMatch[2];
+      return [...this.parseNotationToken(base), { type: 'text', text: multiplier }];
+    }
+
+    // Exact tokens such as KAMEO, THROW, SS, EX, or a single number.
+    const exactIcon = this.getIconForToken(upperToken);
+    if (exactIcon) {
+      return [{ type: 'svg', id: exactIcon }];
+    }
+
+    // Combined direction + button tokens like DB4, BF3, B1, UF2.
+    const directionButtonMatch = upperToken.match(/^([UDBF]+)([1-4])$/);
+    if (directionButtonMatch) {
+      const [, directions, button] = directionButtonMatch;
+      const parts: InputPart[] = [];
+
+      if (directions.length === 2 && ['UB', 'UF', 'DB', 'DF'].includes(directions)) {
+        const diagonalIcon = this.getIconForToken(directions);
+        if (diagonalIcon) {
+          parts.push({ type: 'svg', id: diagonalIcon });
+        }
+      } else {
+        for (const direction of directions) {
+          const directionIcon = this.getIconForToken(direction);
+          if (directionIcon) {
+            parts.push({ type: 'svg', id: directionIcon });
+          }
+        }
+      }
+
+      const buttonIcon = this.getIconForToken(button);
+      if (buttonIcon) {
+        parts.push({ type: 'svg', id: buttonIcon });
+      }
+
+      if (parts.length > 0) {
+        return parts;
+      }
+    }
+
+    // Direction strings like FF, BB, DBF, BDB, DU, etc.
+    if (/^[UDBF]+$/.test(upperToken)) {
+      if (upperToken.length === 2 && ['UB', 'UF', 'DB', 'DF'].includes(upperToken)) {
+        const diagonalIcon = this.getIconForToken(upperToken);
+        if (diagonalIcon) {
+          return [{ type: 'svg', id: diagonalIcon }];
+        }
+      }
+
+      const parts: InputPart[] = [];
+      for (const direction of upperToken) {
+        const directionIcon = this.getIconForToken(direction);
+        if (directionIcon) {
+          parts.push({ type: 'svg', id: directionIcon });
+        }
+      }
+
+      if (parts.length > 0) {
+        return parts;
+      }
+    }
+
+    return [{ type: 'text', text: token }];
   }
 
   private getIconForToken(token: string): string | null {
