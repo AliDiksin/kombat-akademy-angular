@@ -4,7 +4,7 @@
  * This is the root component - the "master controller" of the app.
  * When the app starts, it:
  * 1. Initializes settings (theme, platform)
- * 2. Pre-loads all game data (moves, combos) into cache
+ * 2. Pre-loads all game data (moves, combos, gameplay) into cache
  *
  * PRE-LOADING DATA:
  * By loading the data here (at app startup), we ensure that
@@ -43,5 +43,6 @@ export class App implements OnInit {
     this.gameDataService.loadMoveList().subscribe();
     this.gameDataService.loadKameoMoveList().subscribe();
     this.gameDataService.loadCombos().subscribe();
+    this.gameDataService.loadGameplay().subscribe();
   }
 }

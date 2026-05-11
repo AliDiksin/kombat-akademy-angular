@@ -59,6 +59,18 @@ export interface ComboData {
   notes: string;
 }
 
+// Interface: Defines the shape of a gameplay video's data
+export interface GameplayData {
+  title: string;
+  description: string;
+  url: string;
+  date: string;
+  characters: string;
+  kameos: string;
+  character_page: string;
+  kameo_page: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -67,11 +79,13 @@ export class GameDataService {
   private moveListData: MoveData[] | null = null;
   private kameoMoveListData: MoveData[] | null = null;
   private comboData: ComboData[] | null = null;
+  private gameplayData: GameplayData[] | null = null;
 
   // Cached Observables (shareReplay remembers the last result)
   private moveListCache$: Observable<MoveData[]> | null = null;
   private kameoMoveListCache$: Observable<MoveData[]> | null = null;
   private comboCache$: Observable<ComboData[]> | null = null;
+  private gameplayCache$: Observable<GameplayData[]> | null = null;
 
   constructor(private http: HttpClient) {}
 
@@ -197,6 +211,41 @@ export class GameDataService {
     );
 
     return this.comboCache$;
+  }
+
+  /*
+   * loadGameplay()
+   *
+   * Same pattern as loadMoveList(), but for gameplay videos.
+   */
+  loadGameplay(): Observable<GameplayData[]> {
+    if (this.gameplayData) {
+      return of(this.gameplayData);
+    }
+
+    if (this.gameplayCache$) {
+      return this.gameplayCache$;
+    }
+
+    this.gameplayCache$ = this.http.get<any>('assets/data/gameplay.json').pipe(
+      map(response => {
+        if (response && response.length > 0) {
+          const tableData = response.find(
+            (item: any) => item.type === 'table' && item.name === 'gameplay'
+          );
+          if (tableData && tableData.data) {
+            return tableData.data as GameplayData[];
+          }
+        }
+        return [];
+      }),
+      tap(data => {
+        this.gameplayData = data;
+      }),
+      shareReplay(1)
+    );
+
+    return this.gameplayCache$;
   }
 
   /*

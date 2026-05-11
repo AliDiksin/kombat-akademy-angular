@@ -1,187 +1,418 @@
 /*
  * CHARACTER DETAIL PAGE CSS
  *
- * This page shows everything about a single character.
- * Layout:
- * - Header: image (left) + info/stats (right)
- * - Pros/Cons box
- * - Move list table
- * - Combos list
+ * This page now matches the original character layout:
+ * - Navigation bar across the top
+ * - Overview header with render and info
+ * - Move list and combos sections
+ * - Strategy, Kameos, and Gameplay sections
  */
 
-.character-detail-page {
+.character-page {
   padding: 0;
 }
 
-/* === CHARACTER HEADER === */
-/* The top section with the character image and info side by side */
-.character-header {
+.char-nav {
   display: flex;
-  gap: 32px;
-  margin-bottom: 24px;
-  align-items: flex-start;
-}
-
-/* Character image container */
-.character-image {
-  width: 300px;
-  flex-shrink: 0;
-  background: var(--bg-dark);
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.75);
-}
-
-.character-image img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-/* Character info (right side) */
-.character-info {
-  flex: 1;
-}
-
-.character-name {
-  font-size: 36px;
-  font-weight: 400;
-  margin: 0 0 4px 0;
-}
-
-.character-type {
-  font-size: 20px;
-  font-weight: 400;
-  margin-bottom: 8px;
-}
-
-.character-health {
-  font-size: 16px;
-  color: var(--color);
+  flex-wrap: wrap;
+  gap: 4px;
   margin-bottom: 16px;
 }
 
-.character-description {
-  font-size: 16px;
-  line-height: 24px;
-  margin-bottom: 24px;
-  color: var(--color);
-}
-
-/* === STATS BARS === */
-/* The colored bars that show how good each stat is */
-.character-stats {
-  margin-top: 16px;
-}
-
-.stat-row {
-  display: flex;
+.char-nav-link,
+.char-nav-btn {
   align-items: center;
-  gap: 12px;
+  background: var(--bg-row-1);
+  border-radius: 4px;
+  color: var(--color);
+  display: inline-flex;
+  gap: 8px;
+  padding: 10px 14px;
+  text-decoration: none;
+  transition: background 0.25s, color 0.25s;
+}
+
+.char-nav-link:hover,
+.char-nav-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.char-section {
+  margin-bottom: 32px;
+}
+
+.char-header {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.char-header-info {
+  flex: 1;
+}
+
+.char-nav-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.char-header-img {
+  background: var(--bg-dark);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.75);
+  flex-shrink: 0;
+  overflow: hidden;
+  width: 320px;
+}
+
+.char-header-img img {
+  display: block;
+  height: auto;
+  width: 100%;
+}
+
+.char-overview {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+}
+
+.char-info-box {
+  background: var(--bg-row-1);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.75);
+  padding: 16px;
+}
+
+.char-info-header {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.char-portrait {
+  width: 112px;
+  height: 112px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.char-info-name {
+  font-size: 28px;
+  margin-bottom: 4px;
+}
+
+.char-info-desc {
+  margin-top: 12px;
+  color: rgb(192, 192, 192);
+  line-height: 1.5;
+}
+
+.pros-cons {
+  background: var(--bg-dark);
+  border-radius: 6px;
+  padding: 12px;
+}
+
+.pros-cons-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.pros-cons-label {
+  color: var(--primary-color);
+  font-size: 14px;
   margin-bottom: 8px;
 }
 
-.stat-label {
-  width: 80px;
-  font-size: 14px;
+.pros,
+.cons {
+  margin-left: 18px;
+}
+
+.char-stats {
+  background: var(--bg-row-1);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.75);
+  padding: 16px;
+}
+
+.char-stats-chart {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 12px;
+}
+
+.char-stats-labels,
+.char-stats-bars {
+  display: grid;
+  gap: 8px;
+}
+
+.char-stats-bar-row {
+  background: var(--bg-dark);
+  border-radius: 4px;
+  height: 16px;
+  overflow: hidden;
+}
+
+.char-stats-bar {
+  height: 100%;
+}
+
+.char-section h1 {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+  font-size: 24px;
+  font-weight: 400;
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+}
+
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.tab {
+  border-bottom: 2px solid transparent;
+  color: rgb(192, 192, 192);
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 200;
+  padding: 8px 16px;
+  transition: color 0.25s, border-color 0.25s;
+}
+
+.tab:hover,
+.tab.active {
+  color: #fff;
+}
+
+.tab.active {
+  border-bottom-color: var(--char-color, var(--primary-color));
+}
+
+.subcategory-header {
+  margin: 24px 0 8px;
+}
+
+.subcategory-header h3 {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--char-color, var(--primary-color));
+  font-size: 18px;
+  font-weight: 400;
+  padding-bottom: 8px;
+}
+
+.move-table table,
+.combo-item,
+.char-kameos,
+.gameplay-item {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.move-table table {
+  margin-bottom: 16px;
+}
+
+.move-table thead th,
+.move-table tbody td {
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.move-name {
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.move-command {
+  font-family: monospace;
+  font-size: 12px;
+}
+
+.block-high { color: rgb(255, 128, 128); }
+.block-mid { color: rgb(255, 224, 128); }
+.block-low { color: rgb(128, 192, 255); }
+.block-overhead { color: rgb(255, 128, 255); }
+.block-throw { color: rgb(128, 255, 128); }
+
+.combo-item {
+  background: var(--bg-row-1);
+  border-radius: 4px;
+  margin-bottom: 8px;
+  padding: 12px 16px;
+}
+
+.combo-header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.combo-difficulty {
+  border-radius: 4px;
+  display: inline-block;
+  font-size: 12px;
   font-weight: bold;
+  padding: 2px 8px;
+  text-transform: uppercase;
+}
+
+.diff-easy { background: rgb(48, 128, 48); color: #fff; }
+.diff-medium { background: rgb(192, 128, 0); color: #fff; }
+.diff-hard { background: rgb(192, 48, 48); color: #fff; }
+
+.combo-damage,
+.combo-meter,
+.combo-kameo {
+  font-size: 13px;
+}
+
+.combo-damage {
+  color: var(--char-color, var(--primary-color));
+}
+
+.combo-meter,
+.combo-kameo {
+  color: rgb(128, 128, 128);
+}
+
+.combo-inputs {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 4px;
+  padding: 8px;
+}
+
+.combo-notes {
+  color: rgb(128, 128, 128);
+  font-size: 13px;
+  font-style: italic;
+}
+
+.combo-video a {
+  font-size: 13px;
+}
+
+.strategy-content {
+  background: var(--bg-row-1);
+  border-left: 3px solid var(--char-color, var(--primary-color));
+  border-radius: 4px;
+  padding: 16px;
+}
+
+.char-kameos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 16px;
+  background: var(--bg-row-1);
+  border-radius: 8px;
+}
+
+.char-kameo {
+  display: block;
+  width: 128px;
+  text-decoration: none;
   color: var(--color);
 }
 
-.stat-bar-track {
-  flex: 1;
-  height: 16px;
-  background: var(--bg-dark);
+.char-kameo-portrait {
+  aspect-ratio: 13 / 15;
+  background-color: rgb(16, 16, 16);
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 4px;
+  margin-bottom: 6px;
+}
+
+.char-kameo:hover .char-kameo-portrait {
+  filter: brightness(125%);
+}
+
+.char-kameo-name {
+  font-size: 14px;
+  text-align: center;
+}
+
+.gameplay-videos {
+  display: grid;
+  gap: 12px;
+}
+
+.gameplay-item {
+  background: var(--bg-row-1);
   border-radius: 4px;
   overflow: hidden;
 }
 
-.stat-bar-fill {
-  height: 100%;
-  border-radius: 4px;
-  transition: width 0.5s ease;
-}
-
-.stat-value {
-  width: 40px;
-  font-size: 14px;
-  text-align: right;
+.gameplay-link {
+  display: block;
+  padding: 14px 16px;
+  text-decoration: none;
   color: var(--color);
 }
 
-/* === PROS AND CONS === */
-/* A box showing the character's strengths and weaknesses */
-.pros-cons {
-  background: var(--bg-row-1);
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.75);
-  display: flex;
-  padding: 16px 24px;
-  margin-bottom: 24px;
+.gameplay-link:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
 }
 
-.pros, .cons {
-  flex: 1;
-}
-
-.pros {
-  padding-right: 16px;
-  border-right: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.cons {
-  padding-left: 16px;
-}
-
-.pros-cons-title {
+.gameplay-title {
   font-size: 16px;
-  font-weight: bold;
-  margin-bottom: 8px;
-}
-
-.pros ul, .cons ul {
-  list-style: disc;
-  margin-left: 20px;
-  font-size: 16px;
-}
-
-.pros li, .cons li {
   margin-bottom: 4px;
 }
 
-/* === QUICK LINKS === */
-/* Links to full move list and combos pages */
-.quick-links {
-  display: flex;
-  gap: 16px;
-  margin-bottom: 24px;
+.gameplay-desc {
+  color: rgb(160, 160, 160);
+  font-size: 13px;
+  line-height: 1.4;
 }
 
-.quick-links a {
+.loading,
+.empty-state,
+.not-found {
+  color: rgb(128, 128, 128);
+  text-align: center;
+}
+
+.loading,
+.empty-state {
+  padding: 32px;
+}
+
+.not-found {
+  padding: 64px 16px;
+}
+
+.not-found h2 {
+  font-size: 24px;
+  margin-bottom: 16px;
+}
+
+.not-found a {
   display: inline-block;
+  margin-top: 16px;
   padding: 8px 16px;
   background: var(--bg-row-1);
   border: 1px solid rgb(64, 64, 64);
   border-radius: 4px;
-  font-size: 16px;
-  transition: background 0.25s;
-}
-
-.quick-links a:hover {
-  background: rgba(255, 255, 255, 0.1);
-}
-
-/* === SECTION HEADERS === */
-.section-header {
-  margin: 32px 0 16px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
-  padding-bottom: 8px;
-}
-
-.section-header h2 {
-  font-size: 24px;
-  font-weight: 400;
-  margin: 0;
 }
 
 /* === TABS === */
@@ -360,44 +591,56 @@
 
 /* === RESPONSIVE === */
 @media screen and (max-width: 1024px) {
-  .character-header {
+  .char-header {
     flex-direction: column;
     align-items: center;
     text-align: center;
   }
 
-  .character-image {
+  .char-header-img {
     width: 200px;
   }
 
-  .character-name {
+  .char-nav,
+  .char-nav-links {
+    justify-content: center;
+  }
+
+  .char-overview {
+    grid-template-columns: 1fr;
+  }
+
+  .char-info-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .char-portrait {
+    width: 96px;
+    height: 96px;
+  }
+
+  .char-info-name {
     font-size: 28px;
   }
 
-  .pros-cons {
+  .pros-cons-row {
     flex-direction: column;
   }
 
-  .pros {
-    padding-right: 0;
-    border-right: none;
-    padding-bottom: 16px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  }
-
-  .cons {
-    padding-left: 0;
-    padding-top: 16px;
-  }
-
-  .quick-links {
-    flex-direction: column;
+  .char-stats-chart {
+    grid-template-columns: 96px 1fr;
   }
 
   .move-table table {
-    font-size: 12px;
-    width: 100%;
     display: block;
+    font-size: 12px;
     overflow-x: auto;
+    width: 100%;
+  }
+
+  .char-kameos {
+    justify-content: center;
   }
 }

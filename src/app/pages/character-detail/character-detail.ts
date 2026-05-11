@@ -5,14 +5,23 @@
  * It does 3 things:
  * 1. Reads the character slug from the URL (e.g., "scorpion" from /character/scorpion)
  * 2. Looks up that character in our data
- * 3. Loads their moves and combos from the JSON data files
+ * 3. Loads their moves, combos, kameos, and gameplay from the JSON data files
  */
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { NgFor, NgIf, NgClass } from '@angular/common';
 import { CHARACTERS, CHARACTER_LIST, Character } from '../../data/characters';
+import { KAMEOS } from '../../data/kameos';
+import { TEAMS } from '../../data/teams';
 import { GameDataService, MoveData, ComboData } from '../../services/game-data';
 import { InputNotationComponent } from '../../components/input-notation/input-notation';
+
+interface GameplayVideo {
+  title: string;
+  description: string;
+  url: string;
+  date: string;
+}
 
 @Component({
   selector: 'app-character-detail',
@@ -21,31 +30,29 @@ import { InputNotationComponent } from '../../components/input-notation/input-no
   styleUrl: './character-detail.css',
 })
 export class CharacterDetail implements OnInit {
-  // The character object (name, slug, stats, etc.)
   character: Character | null = null;
 
-  // Move list data from the JSON file
   moves: MoveData[] = [];
   filteredMoves: MoveData[] = [];
   activeMoveTab: string = 'Basic Attacks';
 
-  // Combo data from the JSON file
   combos: ComboData[] = [];
   filteredCombos: ComboData[] = [];
   activeComboTab: string = 'Midscreen';
 
-  // Loading states
+  recommendedKameos: string[] = [];
+  gameplayVideos: GameplayVideo[] = [];
+
   isLoadingMoves: boolean = true;
   isLoadingCombos: boolean = true;
+  isLoadingGameplay: boolean = true;
 
-  // Tab definitions for the move list section
   moveTabs = [
     { id: 'Basic Attacks', name: 'BASIC ATTACKS' },
     { id: 'Special Moves', name: 'SPECIAL MOVES' },
     { id: 'Finishers', name: 'FINISHERS' }
   ];
 
-  // Tab definitions for the combos section
   comboTabs = [
     { id: 'Midscreen', name: 'MIDSCREEN' },
     { id: 'Corner', name: 'CORNER' }
@@ -57,38 +64,38 @@ export class CharacterDetail implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Read the ":name" parameter from the URL
-    // For example, if the URL is /character/scorpion, slug = "scorpion"
     this.route.params.subscribe(params => {
       const slug = params['name'];
       this.loadCharacter(slug);
     });
   }
 
-  /*
-   * loadCharacter()
-   *
-   * Finds the character by their slug (URL-friendly name).
-   * Characters are stored with their display name as the key,
-   * but the URL uses the slug. So we loop through all characters
-   * to find the one with the matching slug.
-   */
   private loadCharacter(slug: string): void {
-    // Find character by slug
+    this.character = null;
+    this.moves = [];
+    this.filteredMoves = [];
+    this.combos = [];
+    this.filteredCombos = [];
+    this.recommendedKameos = [];
+    this.gameplayVideos = [];
+    this.isLoadingMoves = true;
+    this.isLoadingCombos = true;
+    this.isLoadingGameplay = true;
+
     this.character = CHARACTER_LIST.find(c => c.slug === slug) || null;
 
     if (this.character) {
+      this.recommendedKameos = TEAMS[this.character.name] || [];
       this.loadMoves();
       this.loadCombos();
+      this.loadGameplay();
+    } else {
+      this.isLoadingMoves = false;
+      this.isLoadingCombos = false;
+      this.isLoadingGameplay = false;
     }
   }
 
-  /*
-   * loadMoves()
-   *
-   * Loads the move list data from the JSON file,
-   * then filters to only show moves for this character.
-   */
   private loadMoves(): void {
     this.gameDataService.loadMoveList().subscribe({
       next: () => {
@@ -102,12 +109,6 @@ export class CharacterDetail implements OnInit {
     });
   }
 
-  /*
-   * loadCombos()
-   *
-   * Loads the combo data from the JSON file,
-   * then filters to only show combos for this character.
-   */
   private loadCombos(): void {
     this.gameDataService.loadCombos().subscribe({
       next: () => {
@@ -121,12 +122,20 @@ export class CharacterDetail implements OnInit {
     });
   }
 
-  /*
-   * MOVE LIST TAB METHODS
-   *
-   * These control which category of moves is shown
-   * (Basic Attacks, Special Moves, or Finishers)
-   */
+  private loadGameplay(): void {
+    this.gameDataService.loadGameplay().subscribe({
+      next: (videos) => {
+        if (this.character) {
+          this.gameplayVideos = videos.filter(v =>
+            v.character_page && v.character_page.includes(this.character!.name)
+          );
+        }
+        this.isLoadingGameplay = false;
+      },
+      error: () => { this.isLoadingGameplay = false; }
+    });
+  }
+
   setActiveMoveTab(tabId: string): void {
     this.activeMoveTab = tabId;
     this.filterMoves();
@@ -144,12 +153,6 @@ export class CharacterDetail implements OnInit {
     return this.filteredMoves.filter(m => m.subcategory === sub);
   }
 
-  /*
-   * COMBO TAB METHODS
-   *
-   * These control which category of combos is shown
-   * (Midscreen or Corner)
-   */
   setActiveComboTab(tabId: string): void {
     this.activeComboTab = tabId;
     this.filterCombos();
@@ -167,11 +170,6 @@ export class CharacterDetail implements OnInit {
     return this.filteredCombos.filter(c => c.subcategory === sub);
   }
 
-  /*
-   * HELPER METHODS
-   *
-   * These convert data values into CSS classes for styling
-   */
   getBlockClass(bt: string): string {
     switch (bt?.toLowerCase()) {
       case 'high': return 'block-high';
@@ -192,13 +190,16 @@ export class CharacterDetail implements OnInit {
     }
   }
 
-  /*
-   * getStatWidth()
-   *
-   * Converts a stat value (1-5) into a percentage width for the bar.
-   * Max stat is 5, so 5 = 100%, 4 = 80%, etc.
-   */
   getStatWidth(value: number): number {
     return (value / 5) * 100;
+  }
+
+  getKameoSlug(name: string): string {
+    const kameo = KAMEOS[name];
+    return kameo ? kameo.slug : name.toLowerCase().replace(/\s+/g, '-');
+  }
+
+  getKameoPortrait(name: string): string {
+    return `/assets/images/kameos/portraits/${this.getKameoSlug(name)}.png`;
   }
 }
