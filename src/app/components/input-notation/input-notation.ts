@@ -250,7 +250,7 @@ export class InputNotationComponent implements OnInit, OnChanges, OnDestroy {
       const [, directions, button] = directionButtonMatch;
       const parts: InputPart[] = [];
 
-      if (directions.length === 2 && ['UB', 'UF', 'DB', 'DF'].includes(directions)) {
+      if (directions.length === 2 && ['UB', 'UF'].includes(directions)) {
         const diagonalIcon = this.getIconForToken(directions);
         if (diagonalIcon) {
           parts.push({ type: 'svg', id: diagonalIcon });
@@ -276,7 +276,7 @@ export class InputNotationComponent implements OnInit, OnChanges, OnDestroy {
 
     // Direction strings like FF, BB, DBF, BDB, DU, etc.
     if (/^[UDBF]+$/.test(upperToken)) {
-      if (upperToken.length === 2 && ['UB', 'UF', 'DB', 'DF'].includes(upperToken)) {
+      if (upperToken.length === 2 && ['UB', 'UF'].includes(upperToken)) {
         const diagonalIcon = this.getIconForToken(upperToken);
         if (diagonalIcon) {
           return [{ type: 'svg', id: diagonalIcon }];
