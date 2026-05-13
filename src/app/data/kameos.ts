@@ -12,7 +12,7 @@ export const KAMEOS: { [key: string]: Kameo } = {
   'Cyrax': {
     name: 'Cyrax',
     slug: 'cyrax',
-    type: 'Rushdown',
+    type: 'Setplay',
     description: 'A cybernetic ninja with net and bomb attacks.',
     color: 'rgb(255, 140, 0)',
     colorDark: 'rgb(95, 60, 0)',
@@ -21,7 +21,7 @@ export const KAMEOS: { [key: string]: Kameo } = {
   'Darrius': {
     name: 'Darrius',
     slug: 'darrius',
-    type: 'Rushdown',
+    type: 'Setplay',
     description: 'A resistance fighter from Orderrealm.',
     color: 'rgb(255, 140, 0)',
     colorDark: 'rgb(95, 60, 0)',
@@ -30,7 +30,7 @@ export const KAMEOS: { [key: string]: Kameo } = {
   'Ferra': {
     name: 'Ferra',
     slug: 'ferra',
-    type: 'Rushdown',
+    type: 'Mixups',
     description: 'A small but fierce rider from Outworld.',
     color: 'rgb(255, 140, 0)',
     colorDark: 'rgb(95, 60, 0)',
@@ -39,7 +39,7 @@ export const KAMEOS: { [key: string]: Kameo } = {
   'Frost': {
     name: 'Frost',
     slug: 'frost',
-    type: 'Rushdown',
+    type: 'Setplay',
     description: 'A Lin Kuei warrior with ice powers.',
     color: 'rgb(255, 140, 0)',
     colorDark: 'rgb(95, 60, 0)',
@@ -57,7 +57,7 @@ export const KAMEOS: { [key: string]: Kameo } = {
   'Janet Cage': {
     name: 'Janet Cage',
     slug: 'janet-cage',
-    type: 'Rushdown',
+    type: 'Combo extension',
     description: 'An alternate version of Johnny Cage.',
     color: 'rgb(255, 140, 0)',
     colorDark: 'rgb(95, 60, 0)',
@@ -84,7 +84,7 @@ export const KAMEOS: { [key: string]: Kameo } = {
   'Khameleon': {
     name: 'Khameleon',
     slug: 'khameleon',
-    type: 'Rushdown',
+    type: 'All rounder',
     description: 'A Zaterran shapeshifter.',
     color: 'rgb(255, 140, 0)',
     colorDark: 'rgb(95, 60, 0)',
@@ -102,7 +102,7 @@ export const KAMEOS: { [key: string]: Kameo } = {
   'Mavado': {
     name: 'Mavado',
     slug: 'mavado',
-    type: 'Rushdown',
+    type: 'Setplay',
     description: 'A Red Dragon clan leader.',
     color: 'rgb(255, 140, 0)',
     colorDark: 'rgb(95, 60, 0)',
@@ -111,7 +111,7 @@ export const KAMEOS: { [key: string]: Kameo } = {
   'Motaro': {
     name: 'Motaro',
     slug: 'motaro',
-    type: 'Rushdown',
+    type: 'Zoning',
     description: 'A centaur from Outworld.',
     color: 'rgb(255, 140, 0)',
     colorDark: 'rgb(95, 60, 0)',
@@ -120,7 +120,7 @@ export const KAMEOS: { [key: string]: Kameo } = {
   'Sareena': {
     name: 'Sareena',
     slug: 'sareena',
-    type: 'Rushdown',
+    type: 'Zoning',
     description: 'A demoness from the Netherrealm.',
     color: 'rgb(255, 140, 0)',
     colorDark: 'rgb(95, 60, 0)',
@@ -129,7 +129,7 @@ export const KAMEOS: { [key: string]: Kameo } = {
   'Scorpion': {
     name: 'Scorpion',
     slug: 'scorpion',
-    type: 'Rushdown',
+    type: 'Combo extension',
     description: 'A specter with hellfire abilities.',
     color: 'rgb(255, 140, 0)',
     colorDark: 'rgb(95, 60, 0)',
@@ -147,7 +147,7 @@ export const KAMEOS: { [key: string]: Kameo } = {
   'Shujinko': {
     name: 'Shujinko',
     slug: 'shujinko',
-    type: 'Rushdown',
+    type: 'All Rounder',
     description: 'An elderly warrior who can copy moves.',
     color: 'rgb(255, 140, 0)',
     colorDark: 'rgb(95, 60, 0)',
@@ -156,7 +156,7 @@ export const KAMEOS: { [key: string]: Kameo } = {
   'Sonya': {
     name: 'Sonya',
     slug: 'sonya',
-    type: 'Rushdown',
+    type: 'All rounder',
     description: 'A Special Forces commander.',
     color: 'rgb(255, 140, 0)',
     colorDark: 'rgb(95, 60, 0)',
@@ -174,7 +174,7 @@ export const KAMEOS: { [key: string]: Kameo } = {
   'Sub-Zero': {
     name: 'Sub-Zero',
     slug: 'sub-zero',
-    type: 'Rushdown',
+    type: 'Defense',
     description: 'The Grandmaster of the Lin Kuei.',
     color: 'rgb(255, 140, 0)',
     colorDark: 'rgb(95, 60, 0)',
@@ -183,7 +183,7 @@ export const KAMEOS: { [key: string]: Kameo } = {
   'Tremor': {
     name: 'Tremor',
     slug: 'tremor',
-    type: 'Rushdown',
+    type: 'All rounder',
     description: 'A Black Dragon member with earth powers.',
     color: 'rgb(255, 140, 0)',
     colorDark: 'rgb(95, 60, 0)',
