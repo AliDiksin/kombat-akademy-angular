@@ -37,6 +37,14 @@
   filter: brightness(125%);
 }
 
+:host-context(body.light-theme) .kameo-roster-portrait {
+  background-color: rgb(240, 240, 240);
+}
+
+:host-context(body.light-theme) .kameo-roster-portrait:hover {
+  filter: brightness(75%);
+}
+
 @media screen and (max-width: 576px) {
   .kameo-roster {
     width: unset;

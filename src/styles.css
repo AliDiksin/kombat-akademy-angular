@@ -2,12 +2,27 @@
 :root {
   --default-font: 'Arial', 'Times New Roman', 'serif';
   --primary-color: rgb(192, 224, 255);
+  --secondary-color: rgb(232, 230, 227);
+  --tertiary-color: rgb(16, 48, 128);
   --color: rgb(224, 224, 224);
   --bg: rgb(24, 28, 32);
   --bg-dark: rgb(16, 16, 16);
   --bg-row-1: rgb(32, 36, 40);
   --bg-row-2: rgb(24, 24, 24);
   --border: rgb(32, 32, 32);
+  --panel-shadow: 0 2px 8px rgba(0, 0, 0, 0.75);
+}
+
+body.light-theme {
+  --primary-color: rgb(0, 96, 192);
+  --color: rgb(32, 32, 32);
+  --bg: rgb(232, 232, 232);
+  --bg-dark: rgb(240, 240, 240);
+  --bg-row-1: rgb(255, 255, 255);
+  --bg-row-2: rgb(236, 236, 236);
+  --border: rgb(217, 217, 217);
+  --panel-shadow: 0 2px 8px rgba(0, 0, 0, 0.22);
+  font-weight: 200;
 }
 
 /* Reset */
@@ -49,6 +64,10 @@ a:hover {
   color: #fff;
 }
 
+body.light-theme a:hover {
+  color: #000;
+}
+
 img {
   max-width: 100%;
   height: auto;
@@ -60,7 +79,7 @@ form {
 
 select {
   background: var(--bg-dark);
-  border: 1px solid transparent;
+  border: 1px solid rgb(48, 48, 48);
   color: var(--color);
   font-family: sans-serif;
   font-size: 16px;
@@ -75,6 +94,7 @@ select {
 }
 
 select:hover {
+  background: var(--bg-row-1);
   border-color: rgb(64, 64, 64);
 }
 
@@ -108,9 +128,20 @@ input[type="submit"]:hover, button:hover {
   filter: brightness(125%);
 }
 
+body.light-theme input[type="submit"],
+body.light-theme button {
+  color: rgb(32, 32, 32);
+}
+
 /* Site Content */
 .site-content {
   min-height: calc(100vh - 215px - 120px);
+}
+
+.site-container {
+  margin: 0 auto;
+  max-width: 1200px;
+  width: 100%;
 }
 
 /* Page Title / Content */
@@ -126,7 +157,7 @@ input[type="submit"]:hover, button:hover {
 /* Guide Table */
 .guide table,
 .table-container table {
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.75);
+  box-shadow: var(--panel-shadow);
   font-size: 16px;
   width: 100%;
   border-collapse: collapse;
@@ -165,6 +196,17 @@ input[type="submit"]:hover, button:hover {
   background-color: var(--bg-row-1);
 }
 
+body.light-theme .guide table,
+body.light-theme .table-container table {
+  color: rgb(32, 32, 32);
+}
+
+body.light-theme .guide table tr,
+body.light-theme .table-container table tr {
+  border-left: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+}
+
 .guide table.frame-data tbody tr td {
   border-top: 1px solid rgba(0, 0, 0, 0.25);
 }
@@ -185,5 +227,9 @@ input[type="submit"]:hover, button:hover {
 
   .page-title {
     font-size: 24px;
+  }
+
+  .site-container {
+    max-width: none;
   }
 }

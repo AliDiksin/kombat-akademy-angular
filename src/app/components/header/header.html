@@ -24,12 +24,12 @@
           <option value="plain-text">Plain Text</option>
         </select>
       </div>
-      <div class="theme-selector" (click)="toggleTheme()">
-        <i class="fa-solid fa-moon"></i>
+      <button class="theme-selector" type="button" (click)="toggleTheme()" [attr.aria-label]="isDarkTheme ? 'Switch to light mode' : 'Switch to dark mode'">
+        <i class="fa-solid" [ngClass]="isDarkTheme ? 'fa-moon' : 'fa-sun'"></i>
         <div class="theme-btn">
           <div class="theme-btn-switch"></div>
         </div>
-      </div>
+      </button>
     </div>
   </div>
 </div>

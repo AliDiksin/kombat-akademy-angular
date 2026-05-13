@@ -48,29 +48,33 @@
 
     <!-- Combo List -->
     <div class="combos-content" *ngIf="selectedCharacter && !isLoading">
-      <div *ngFor="let subcategory of getSubcategories()">
+      <div class="combo-group" *ngFor="let subcategory of getSubcategories()">
         <div class="subcategory-header" *ngIf="subcategory">
           <h3>{{ subcategory }}</h3>
         </div>
-        <div class="combo-item" *ngFor="let combo of getCombosBySubcategory(subcategory)">
-          <div class="combo-header">
-            <span class="combo-difficulty" [ngClass]="getDifficultyClass(combo.difficulty)">
-              {{ combo.difficulty }}
-            </span>
-            <span class="combo-damage">{{ combo.damage }}</span>
-            <span class="combo-meter" *ngIf="combo.meter !== '0'">Meter: {{ combo.meter }}</span>
-            <span class="combo-kameo" *ngIf="combo.kameo_name">Kameo: {{ combo.kameo_name }}</span>
-          </div>
-          <div class="combo-inputs">
-            <app-input-notation [input]="combo.combo" size="s"></app-input-notation>
-          </div>
-          <div class="combo-notes" *ngIf="combo.notes">
-            <i class="fa-solid fa-circle-info"></i> {{ combo.notes }}
-          </div>
-          <div class="combo-video" *ngIf="combo.url">
-            <a [href]="combo.url" target="_blank" rel="noopener">
-              <i class="fa-solid fa-video"></i> Watch Video
-            </a>
+        <div class="combo-group-body">
+          <div class="combo-item" *ngFor="let combo of getCombosBySubcategory(subcategory)">
+            <div class="combo-header">
+              <div class="combo-inputs">
+                <app-input-notation [input]="combo.combo" size="s"></app-input-notation>
+              </div>
+              <span class="combo-difficulty" [ngClass]="getDifficultyClass(combo.difficulty)">
+                {{ combo.difficulty }}
+              </span>
+              <a class="combo-video" *ngIf="combo.url" [href]="combo.url" target="_blank" rel="noopener" aria-label="Watch combo video">
+                <i class="fa-solid fa-play"></i>
+              </a>
+              <span class="combo-damage">{{ combo.damage }}</span>
+            </div>
+            <div class="combo-footer" *ngIf="combo.notes || combo.meter !== '0' || combo.kameo_name">
+              <div class="combo-notes" *ngIf="combo.notes">
+                {{ combo.notes }}
+              </div>
+              <div class="combo-meta">
+                <span class="combo-meter" *ngIf="combo.meter !== '0'">Meter: {{ combo.meter }}</span>
+                <span class="combo-kameo" *ngIf="combo.kameo_name">Kameo: {{ combo.kameo_name }}</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>

@@ -10,7 +10,7 @@
 /* === TOP BAR === */
 /* This is the thin dark bar at the very top */
 .site-header-top {
-  background-color: rgb(16, 16, 16);
+  background-color: var(--bg-dark);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.75);
   position: relative;
   z-index: 100;
@@ -53,10 +53,14 @@
 
 /* Theme toggle - the moon/sun switch */
 .theme-selector {
+  background: transparent;
+  border: 0;
   display: flex;
   align-items: center;
   color: var(--color);
   cursor: pointer;
+  font-size: 16px;
+  padding: 0;
   transition: color 0.25s;
 }
 
@@ -87,16 +91,20 @@
 }
 
 /* When light theme is active, move switch to the left */
-body.light-theme .theme-btn {
+:host-context(body.light-theme) .theme-btn {
   background-color: rgb(128, 128, 128);
 }
 
-body.light-theme .theme-btn-switch {
+:host-context(body.light-theme) .theme-btn-switch {
   left: 22%;
 }
 
-body.light-theme .theme-selector {
+:host-context(body.light-theme) .theme-selector {
   color: rgb(32, 32, 32);
+}
+
+:host-context(body.light-theme) .theme-selector:hover {
+  color: #000;
 }
 
 /* === MAIN HEADER === */
@@ -131,6 +139,20 @@ body.light-theme .theme-selector {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
   position: relative;
   z-index: 99;
+}
+
+:host-context(body.light-theme) .site-header-nav {
+  background: linear-gradient(rgb(224, 224, 224), rgb(192, 192, 192));
+}
+
+:host-context(body.light-theme) .nav-item {
+  color: rgb(64, 64, 64);
+  text-shadow: 1px 1px 2px #fff;
+}
+
+:host-context(body.light-theme) .nav-item:hover,
+:host-context(body.light-theme) .nav-item.active {
+  color: #000;
 }
 
 .site-header-nav-inner {

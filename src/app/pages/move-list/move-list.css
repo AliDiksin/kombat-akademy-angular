@@ -11,7 +11,7 @@
 
 /* Character selector */
 .move-list-select {
-  margin-bottom: 16px;
+  margin: 16px 0;
 }
 
 .select-group {
@@ -32,20 +32,22 @@
 /* Category tabs */
 .move-list-tabs {
   display: flex;
-  gap: 4px;
-  margin-bottom: 16px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
-  padding-bottom: 8px;
+  margin-bottom: 0;
+  background-color: rgb(20, 20, 20);
+  border: 1px solid var(--border);
+  box-shadow: var(--panel-shadow);
 }
 
 .tab {
-  padding: 8px 16px;
+  background-color: rgb(20, 20, 20);
+  border-right: 1px solid var(--border);
+  padding: 4px 8px;
   cursor: pointer;
-  color: rgb(192, 192, 192);
-  font-size: 16px;
+  color: rgb(128, 128, 128);
+  font-size: 20px;
   font-weight: 200;
   transition: color 0.25s;
-  border-bottom: 2px solid transparent;
+  width: 12.5%;
 }
 
 .tab:hover {
@@ -53,8 +55,8 @@
 }
 
 .tab.active {
+  background-color: rgb(16, 16, 16);
   color: #fff;
-  border-bottom-color: var(--primary-color);
 }
 
 /* Loading state */
@@ -66,30 +68,59 @@
 
 /* Subcategory header */
 .subcategory-header {
-  margin: 24px 0 8px 0;
+  margin: 0;
 }
 
 .subcategory-header h3 {
-  font-size: 20px;
-  font-weight: 400;
-  color: var(--primary-color);
-  padding-bottom: 8px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: var(--bg-row-1);
+  border-left: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+  color: var(--color);
+  font-size: 16px;
+  font-weight: 200;
+  padding: 8px;
+  text-align: center;
 }
 
 /* Table styling */
 .move-list-table table {
+  background-color: var(--bg-row-1);
+  border-bottom: 1px solid var(--border);
+  box-shadow: var(--panel-shadow);
+  color: var(--color);
+  font-size: 16px;
+  font-weight: 200;
   margin-bottom: 16px;
+  width: 100%;
 }
 
 .move-list-table thead th {
+  background-color: var(--bg-dark);
+  border: 1px solid var(--border);
   font-size: 14px;
+  font-weight: 200;
+  padding: 8px;
   white-space: nowrap;
 }
 
 .move-list-table tbody td {
+  border-left: 1px solid var(--border);
+  border-right: 1px solid var(--border);
   font-size: 14px;
+  padding: 8px;
   white-space: nowrap;
+}
+
+.move-list-table tbody tr:nth-child(2n) td {
+  background-color: var(--bg-row-2);
+}
+
+.move-list-table tbody tr:nth-child(2n + 1) td {
+  background-color: var(--bg-row-1);
+}
+
+.move-list-table tbody tr:hover td {
+  background-color: rgb(48, 52, 56);
 }
 
 .move-name {
@@ -102,6 +133,34 @@
 .move-command {
   font-family: monospace;
   font-size: 13px;
+}
+
+:host-context(body.light-theme) .move-list-tabs,
+:host-context(body.light-theme) .move-list-table table {
+  box-shadow: var(--panel-shadow);
+}
+
+:host-context(body.light-theme) .move-list-tabs {
+  background-color: rgb(233, 233, 233);
+}
+
+:host-context(body.light-theme) .tab {
+  background-color: rgb(233, 233, 233);
+  color: rgb(96, 96, 96);
+}
+
+:host-context(body.light-theme) .tab.active {
+  background-color: #fff;
+  color: #000;
+}
+
+:host-context(body.light-theme) .tab:hover,
+:host-context(body.light-theme) .move-list-table tbody tr:hover td {
+  color: #000;
+}
+
+:host-context(body.light-theme) .move-list-table tbody tr:hover td {
+  background-color: rgb(224, 224, 224);
 }
 
 /* Block type color coding */

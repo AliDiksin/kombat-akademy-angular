@@ -14,6 +14,10 @@ export class Header {
 
   constructor(private settingsService: SettingsService) {}
 
+  get isDarkTheme(): boolean {
+    return this.settingsService.isDark();
+  }
+
   selectPlatform(event: Event): void {
     const select = event.target as HTMLSelectElement;
     this.settingsService.setPlatform(select.value);

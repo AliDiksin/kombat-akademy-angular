@@ -16,39 +16,51 @@
 
 .character-roster-row {
   display: flex;
-  flex-wrap: wrap;
   gap: 8px;
-  justify-content: center;
 }
 
 .character-portrait {
-  width: 80px;
-  height: 80px;
+  aspect-ratio: 12 / 16;
+  background-color: var(--bg-dark);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  border-radius: 4px;
   cursor: pointer;
+  flex: 1 1 0;
+  min-width: 0;
   transition: filter 0.25s;
   display: block;
   text-decoration: none;
+}
+
+.character-portrait:nth-child(6),
+.character-portrait:nth-child(13) {
+  margin-right: 8px;
 }
 
 .character-portrait:hover {
   filter: brightness(125%);
 }
 
-@media screen and (max-width: 1024px) {
-  .character-portrait {
-    width: 60px;
-    height: 60px;
-  }
+:host-context(body.light-theme) .character-portrait {
+  background-color: rgb(240, 240, 240);
 }
 
-@media screen and (max-width: 384px) {
-  .character-portrait {
-    width: 48px;
-    height: 48px;
+:host-context(body.light-theme) .character-portrait:hover {
+  filter: brightness(75%);
+}
+
+@media screen and (max-width: 1024px) {
+  .character-roster-row {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .character-portrait,
+  .character-portrait:nth-child(6),
+  .character-portrait:nth-child(13) {
+    flex: 0 0 20%;
+    margin-right: 0;
   }
 }
 
