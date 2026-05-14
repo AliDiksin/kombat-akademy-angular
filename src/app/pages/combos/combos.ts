@@ -4,10 +4,11 @@ import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { GameDataService, ComboData } from '../../services/game-data';
 import { InputNotationComponent } from '../../components/input-notation/input-notation';
+import { VideoPlayerComponent } from '../../components/video-player/video-player';
 
 @Component({
   selector: 'app-combos',
-  imports: [NgFor, NgIf, NgClass, FormsModule, InputNotationComponent],
+  imports: [NgFor, NgIf, NgClass, FormsModule, InputNotationComponent, VideoPlayerComponent],
   templateUrl: './combos.html',
   styleUrl: './combos.css',
 })
@@ -20,6 +21,9 @@ export class Combos implements OnInit {
   filteredCombos: ComboData[] = [];
   activeTab: string = 'Midscreen';
   isLoading: boolean = true;
+  videoPlayerVisible: boolean = false;
+  videoPlaylist: { title: string; description: string; url: string }[] = [];
+  videoStartIndex: number = 0;
 
   tabs = [
     { id: 'Midscreen', name: 'MIDSCREEN' },
@@ -99,5 +103,18 @@ export class Combos implements OnInit {
 
   getCombosBySubcategory(sub: string): ComboData[] {
     return this.filteredCombos.filter(c => c.subcategory === sub);
+  }
+
+  openVideoPlayer(combo: ComboData): void {
+    this.videoPlaylist = this.filteredCombos
+      .filter(c => c.url)
+      .map(c => ({ title: c.combo, description: c.notes || '', url: c.url }));
+    this.videoStartIndex = this.videoPlaylist.findIndex(v => v.url === combo.url);
+    if (this.videoStartIndex < 0) this.videoStartIndex = 0;
+    this.videoPlayerVisible = true;
+  }
+
+  closeVideoPlayer(): void {
+    this.videoPlayerVisible = false;
   }
 }

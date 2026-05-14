@@ -61,7 +61,7 @@
               <span class="combo-difficulty" [ngClass]="getDifficultyClass(combo.difficulty)">
                 {{ combo.difficulty }}
               </span>
-              <a class="combo-video" *ngIf="combo.url" [href]="combo.url" target="_blank" rel="noopener" aria-label="Watch combo video">
+              <a class="combo-video" *ngIf="combo.url" (click)="openVideoPlayer(combo)" aria-label="Watch combo video">
                 <i class="fa-solid fa-play"></i>
               </a>
               <span class="combo-damage">{{ combo.damage }}</span>
@@ -89,3 +89,10 @@
     </div>
   </div>
 </div>
+
+<app-video-player
+  [visible]="videoPlayerVisible"
+  [playlist]="videoPlaylist"
+  [startIndex]="videoStartIndex"
+  (close)="closeVideoPlayer()">
+</app-video-player>
